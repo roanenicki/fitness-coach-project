@@ -1,4 +1,2 @@
-async function requireUser(){const {data:{user}}=await supabaseClient.auth.getUser();if(!user){location.href="index.html";return null}return user}
-async function logout(){await supabaseClient.auth.signOut();location.href="index.html"}
-document.getElementById("logout")?.addEventListener("click",logout);
-document.getElementById("loginForm")?.addEventListener("submit",async e=>{e.preventDefault();const msg=document.getElementById("loginMessage"),email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){msg.textContent=error.message;return}const {data:profile}=await supabaseClient.from("profiles").select("role").eq("id",data.user.id).single();location.href=profile?.role==="coach"?"coach.html":"app.html"});
+const form=document.getElementById('loginForm'), msg=document.getElementById('message');
+form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='Connexion…';const {data,error}=await supabaseClient.auth.signInWithPassword({email:email.value.trim(),password:password.value});if(error){msg.textContent=error.message;return;}const {data:p}=await supabaseClient.from('profiles').select('role').eq('id',data.user.id).single();location.href=p?.role==='coach'?'coach.html':'app.html';});
