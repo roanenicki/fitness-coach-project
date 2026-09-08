@@ -2362,3 +2362,47 @@ button:hover:not(:disabled) {
   }
 
 }
+
+/* ============================================================
+   RESPONSIVE PWD CRAATE USER
+   ============================================================ */
+
+.password-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrap input {
+  width: 100%;
+  padding-right: 48px;
+  box-sizing: border-box;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.password-toggle:hover {
+  background: #f1f5f9;
+  color: #16a36a;
+}
+
+.password-toggle svg {
+  width: 19px;
+  height: 19px;
+}
+

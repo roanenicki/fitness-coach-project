@@ -204,30 +204,28 @@
                 <!-- ---------------------------------------------
                      MOT DE PASSE
                      --------------------------------------------- -->
+                <label class="password-field">
+                Mot de passe
 
-                <label for="password">
-
-                    <span class="input-label">
-
-                        <i data-lucide="key-round"></i>
-
-                        Mot de passe
-
-                    </span>
-
-
+                <div class="password-input-wrap">
                     <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        required
-                        autocomplete="current-password"
-                        placeholder="Votre mot de passe"
+                    id="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
                     >
 
+                    <button
+                    id="toggleLoginPassword"
+                    class="password-toggle"
+                    type="button"
+                    aria-label="Afficher le mot de passe"
+                    title="Afficher le mot de passe"
+                    >
+                    <i data-lucide="eye"></i>
+                    </button>
+                </div>
                 </label>
-
-
 
                 <!-- ---------------------------------------------
                      CONNEXION
