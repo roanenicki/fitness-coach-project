@@ -1,1 +1,2364 @@
-:root{--bg:#f5f7f8;--card:#fff;--text:#162027;--muted:#6d7880;--line:#e4e8eb;--accent:#111827;--green:#16845b;--danger:#c83a3a;--shadow:0 10px 30px rgba(20,30,40,.07)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;border:0}.topbar{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100vw - 1100px)/2))}.brand{font-weight:900;letter-spacing:.08em;font-size:24px}.brand span{font-weight:500}.brand.small{font-size:18px}.container{max-width:1100px;margin:auto;padding:28px 20px 60px}.hero{padding:8px 0 22px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--muted)}h1{font-size:34px;margin:4px 0 6px}h2{margin:0 0 8px}.muted{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}.session-head,.section-title{display:flex;align-items:center;justify-content:space-between;gap:18px}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}.pill.live{color:var(--green);border-color:#bfe6d5}.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:25px;white-space:nowrap}.exercise-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:22px 0}.exercise{border:1px solid var(--line);border-radius:14px;padding:15px;display:flex;gap:14px;align-items:center}.exercise img{width:110px;height:82px;object-fit:contain;background:#fafafa;border-radius:10px}.exercise h3{font-size:16px;margin:0 0 5px}.exercise p{margin:3px 0;font-size:13px;color:var(--muted)}.start-row{display:flex;justify-content:space-between;align-items:end;gap:16px;border-top:1px solid var(--line);padding-top:18px}.compact{max-width:160px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.auth-page{min-height:100vh;display:grid;place-items:center;padding:20px}.auth-card{width:min(420px,100%);background:#fff;padding:34px;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow);text-align:center}.auth-card form{text-align:left}.auth-card .brand{margin-bottom:4px}label{display:block;font-size:13px;font-weight:700;margin:14px 0}input,textarea{display:block;width:100%;border:1px solid #d7dde1;border-radius:10px;padding:12px;margin-top:7px;background:#fff;color:var(--text)}button{border-radius:10px;padding:11px 16px;font-weight:750}.primary{background:var(--accent);color:#fff}.danger{background:var(--danger);color:#fff}.ghost{background:#fff;border:1px solid var(--line);color:var(--text)}.big{padding:14px 20px}.message{font-size:13px;color:var(--danger);min-height:18px}.hidden{display:none}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}.metric{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}.metric b{display:block;font-size:27px}.metric span{display:block;color:var(--muted);font-size:12px;margin-top:5px}.history-item{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px}.history-item:last-child{border-bottom:0}.status{font-weight:800;font-size:12px}.status.ok{color:var(--green)}@media(max-width:720px){h1{font-size:28px}.exercise-list{grid-template-columns:1fr}.session-head{align-items:flex-start}.start-row{flex-direction:column;align-items:stretch}.compact{max-width:none}.form-grid,.metrics{grid-template-columns:1fr 1fr}.metric{padding:14px}.exercise img{width:90px;height:72px}}@media(max-width:450px){.card{padding:17px}.exercise img{width:82px}.timer{font-size:19px}}
+/* ============================================================
+   FITNESS COACH — DESIGN SYSTEM
+   Vert santé + orange énergie
+   ============================================================ */
+
+:root {
+
+  /* Couleurs principales */
+  --bg: #f5f8f6;
+  --card: #ffffff;
+  --text: #14211b;
+  --muted: #6f7c75;
+  --line: #e1e9e4;
+
+  --accent: #16a36a;
+  --accent-dark: #087443;
+  --accent-light: #e7f7ef;
+
+  --orange: #f97316;
+  --orange-dark: #d95d08;
+  --orange-light: #fff1e8;
+
+  --danger: #c83a3a;
+
+  --shadow:
+    0 10px 30px rgba(20, 50, 35, .07);
+
+  --shadow-hover:
+    0 14px 36px rgba(20, 50, 35, .11);
+
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+
+  margin: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7faf8 0%,
+      #f3f7f5 100%
+    );
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  line-height: 1.5;
+}
+
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+
+.topbar {
+
+  height: 68px;
+
+  background: rgba(255, 255, 255, .94);
+
+  border-bottom:
+    1px solid var(--line);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding:
+    0 max(
+      20px,
+      calc((100vw - 1100px) / 2)
+    );
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 100;
+
+  backdrop-filter:
+    blur(14px);
+}
+
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+
+.brand {
+
+  font-weight: 900;
+
+  letter-spacing: -.02em;
+
+  font-size: 23px;
+
+  color: var(--accent-dark);
+}
+
+
+.brand span {
+
+  font-weight: 500;
+
+  color: var(--text);
+}
+
+
+.brand.small {
+  font-size: 18px;
+}
+
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container {
+
+  max-width: 1100px;
+
+  margin: auto;
+
+  padding:
+    30px 20px 70px;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero {
+
+  padding:
+    12px 0 25px;
+}
+
+
+.eyebrow {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 11px;
+
+  font-weight: 850;
+
+  letter-spacing: .14em;
+
+  color: var(--accent-dark);
+
+  text-transform: uppercase;
+}
+
+
+.eyebrow::before {
+
+  content: "";
+
+  width: 7px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--orange);
+}
+
+
+h1 {
+
+  font-size: 35px;
+
+  line-height: 1.15;
+
+  margin:
+    6px 0 7px;
+
+  letter-spacing: -.025em;
+}
+
+
+h2 {
+
+  margin:
+    0 0 8px;
+
+  font-size: 21px;
+
+  letter-spacing: -.015em;
+}
+
+
+h3 {
+
+  letter-spacing: -.01em;
+}
+
+
+.muted {
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card {
+
+  background: var(--card);
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 20px;
+
+  padding: 24px;
+
+  margin-bottom: 20px;
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.card:hover {
+
+  box-shadow:
+    var(--shadow-hover);
+}
+
+
+/* ============================================================
+   SESSION HEADER
+   ============================================================ */
+
+.session-head,
+.section-title {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+
+/* ============================================================
+   PILLS
+   ============================================================ */
+
+.pill {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 999px;
+
+  padding:
+    6px 11px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: var(--muted);
+
+  background: #fafcfb;
+}
+
+
+.pill.live {
+
+  color: var(--accent-dark);
+
+  border-color:
+    #bce7d2;
+
+  background:
+    var(--accent-light);
+}
+
+
+/* ============================================================
+   TIMER
+   ============================================================ */
+
+.timer {
+
+  font-variant-numeric:
+    tabular-nums;
+
+  font-weight: 850;
+
+  font-size: 27px;
+
+  white-space: nowrap;
+
+  color: var(--accent-dark);
+
+  letter-spacing: -.03em;
+}
+
+
+/* ============================================================
+   EXERCISE LIST
+   ============================================================ */
+
+.exercise-list {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 14px;
+
+  margin:
+    22px 0;
+}
+
+
+/* ============================================================
+   EXERCISE CARD
+   ============================================================ */
+
+.exercise {
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 16px;
+
+  padding: 15px;
+
+  display: flex;
+
+  gap: 14px;
+
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #fbfdfc
+    );
+
+  transition:
+    border-color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.exercise:hover {
+
+  border-color:
+    #b8dfcb;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 24px rgba(20, 60, 40, .08);
+}
+
+
+.exercise img {
+
+  width: 110px;
+
+  height: 82px;
+
+  object-fit: contain;
+
+  background:
+    var(--accent-light);
+
+  border-radius: 12px;
+
+  padding: 5px;
+}
+
+
+.exercise h3 {
+
+  font-size: 16px;
+
+  margin:
+    0 0 5px;
+}
+
+
+.exercise p {
+
+  margin:
+    3px 0;
+
+  font-size: 13px;
+
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   START ROW
+   ============================================================ */
+
+.start-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: end;
+
+  gap: 16px;
+
+  border-top:
+    1px solid var(--line);
+
+  padding-top: 18px;
+}
+
+
+.compact {
+  max-width: 160px;
+}
+
+
+/* ============================================================
+   FORMULAIRES
+   ============================================================ */
+
+.form-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 14px;
+}
+
+
+label {
+
+  display: block;
+
+  font-size: 13px;
+
+  font-weight: 750;
+
+  margin:
+    14px 0;
+
+  color: var(--text);
+}
+
+
+input,
+textarea,
+select {
+
+  display: block;
+
+  width: 100%;
+
+  border:
+    1px solid #d6e0da;
+
+  border-radius: 11px;
+
+  padding: 12px;
+
+  margin-top: 7px;
+
+  background: #fff;
+
+  color: var(--text);
+
+  outline: none;
+
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+
+  border-color:
+    var(--accent);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(22, 163, 106, .12);
+}
+
+
+textarea {
+
+  min-height: 90px;
+
+  resize: vertical;
+}
+
+
+/* ============================================================
+   BOUTONS
+   ============================================================ */
+
+button {
+
+  border-radius: 11px;
+
+  padding:
+    11px 16px;
+
+  font-weight: 750;
+
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    background .15s ease;
+}
+
+
+button:hover:not(:disabled) {
+
+  transform:
+    translateY(-1px);
+}
+
+
+.primary {
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-dark)
+    );
+
+  color: #fff;
+
+  box-shadow:
+    0 6px 16px
+    rgba(22, 163, 106, .22);
+}
+
+
+.primary:hover:not(:disabled) {
+
+  box-shadow:
+    0 9px 22px
+    rgba(22, 163, 106, .30);
+}
+
+
+.danger {
+
+  background:
+    var(--danger);
+
+  color: #fff;
+}
+
+
+.ghost {
+
+  background: #fff;
+
+  border:
+    1px solid var(--line);
+
+  color: var(--text);
+}
+
+
+.secondary {
+
+  background:
+    #f3f8f5;
+
+  border:
+    1px solid #d9e8df;
+
+  color:
+    var(--accent-dark);
+}
+
+
+.secondary:hover:not(:disabled) {
+
+  background:
+    var(--accent-light);
+
+  border-color:
+    #b9ddca;
+}
+
+
+.big {
+
+  padding:
+    14px 20px;
+
+  font-size: 15px;
+}
+
+
+/* ============================================================
+   BOUTON ORANGE
+   ============================================================ */
+
+.orange {
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange),
+      var(--orange-dark)
+    );
+
+  color: #fff;
+
+  box-shadow:
+    0 6px 16px
+    rgba(249, 115, 22, .22);
+}
+
+
+.orange:hover:not(:disabled) {
+
+  box-shadow:
+    0 9px 22px
+    rgba(249, 115, 22, .30);
+}
+
+
+/* ============================================================
+   AUTHENTIFICATION
+   ============================================================ */
+
+.auth-page {
+
+  min-height: 100vh;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 20px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      #e4f7ed 0,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      #fff0e4 0,
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+
+.auth-card {
+
+  width:
+    min(420px, 100%);
+
+  background:
+    rgba(255,255,255,.97);
+
+  padding: 36px;
+
+  border-radius: 24px;
+
+  border:
+    1px solid var(--line);
+
+  box-shadow:
+    0 24px 60px
+    rgba(25, 60, 40, .10);
+
+  text-align: center;
+}
+
+
+.auth-card h1 {
+
+  color:
+    var(--accent-dark);
+}
+
+
+.auth-card form {
+  text-align: left;
+}
+
+
+.auth-card .brand {
+  margin-bottom: 4px;
+}
+
+
+/* ============================================================
+   MESSAGES
+   ============================================================ */
+
+.message {
+
+  font-size: 13px;
+
+  color:
+    var(--danger);
+
+  min-height: 18px;
+}
+
+
+.message.success {
+
+  color:
+    var(--accent-dark);
+}
+
+
+/* ============================================================
+   METRICS
+   ============================================================ */
+
+.metrics {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+
+.metric {
+
+  background:
+    #fff;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 17px;
+
+  padding: 20px;
+
+  box-shadow:
+    var(--shadow);
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.metric::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 70px;
+
+  height: 70px;
+
+  border-radius: 50%;
+
+  background:
+    var(--accent-light);
+
+  right: -25px;
+
+  top: -25px;
+}
+
+
+.metric b {
+
+  display: block;
+
+  font-size: 27px;
+
+  color:
+    var(--accent-dark);
+
+  position: relative;
+
+  z-index: 1;
+}
+
+
+.metric span {
+
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+  margin-top: 5px;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* ============================================================
+   HISTORIQUE
+   ============================================================ */
+
+.history-item {
+
+  padding:
+    15px 0;
+
+  border-bottom:
+    1px solid var(--line);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.history-item:last-child {
+  border-bottom: 0;
+}
+
+
+.status {
+
+  font-weight: 800;
+
+  font-size: 12px;
+}
+
+
+.status.ok {
+
+  color:
+    var(--accent-dark);
+}
+
+
+/* ============================================================
+   PROGRAMME COACH
+   ============================================================ */
+
+.program-editor {
+
+  margin-top: 8px;
+}
+
+
+.program-editor-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.program-meta {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+.program-meta span {
+
+  display: inline-flex;
+
+  padding:
+    7px 11px;
+
+  border-radius: 999px;
+
+  background:
+    var(--accent-light);
+
+  color:
+    var(--accent-dark);
+
+  font-size: 12px;
+
+  font-weight: 750;
+}
+
+
+.program-actions {
+
+  display: flex;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin:
+    20px 0;
+}
+
+
+/* ============================================================
+   PHASES
+   ============================================================ */
+
+.program-phase {
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 18px;
+
+  margin-bottom: 18px;
+
+  overflow: hidden;
+
+  background: #fff;
+}
+
+
+.phase-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5fbf8,
+      #ffffff
+    );
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.phase-header h4 {
+
+  margin:
+    0 0 3px;
+
+  color:
+    var(--accent-dark);
+}
+
+
+.phase-header p {
+  margin: 0;
+}
+
+
+/* ============================================================
+   BLOCS D'EXERCICES
+   ============================================================ */
+
+.program-block {
+
+  padding:
+    17px 18px;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.program-block:last-child {
+  border-bottom: 0;
+}
+
+
+.block-header {
+
+  margin-bottom:
+    12px;
+}
+
+
+.block-header h5 {
+
+  margin: 0;
+
+  font-size: 14px;
+
+  color:
+    var(--text);
+}
+
+
+/* ============================================================
+   EXERCICES ÉDITABLES
+   ============================================================ */
+
+.editable-exercise {
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 14px;
+
+  padding: 14px;
+
+  margin-bottom: 10px;
+
+  background:
+    #fcfefd;
+}
+
+
+.editable-exercise:last-child {
+  margin-bottom: 0;
+}
+
+
+.exercise-main {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 90px;
+
+  gap: 10px;
+}
+
+
+.exercise-main input {
+
+  margin-top: 0;
+}
+
+
+.exercise-settings {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+
+.exercise-settings label {
+
+  margin: 0;
+
+  font-size: 11px;
+
+  color: var(--muted);
+}
+
+
+.exercise-settings input,
+.exercise-settings select {
+
+  margin-top: 5px;
+
+  padding:
+    9px;
+
+  font-size: 13px;
+}
+
+
+.exercise-note {
+
+  min-height: 65px;
+
+  margin-top: 10px;
+
+  font-size: 13px;
+}
+
+
+.exercise-actions {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+
+.exercise-actions button {
+
+  font-size: 12px;
+
+  padding:
+    8px 12px;
+}
+
+
+/* ============================================================
+   ATHLÈTES
+   ============================================================ */
+
+.athlete-item {
+
+  width: 100%;
+
+  text-align: left;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  background:
+    #fff;
+
+  border:
+    1px solid var(--line);
+
+  margin-bottom: 9px;
+
+  color: var(--text);
+
+  transition:
+    border-color .15s ease,
+    background .15s ease,
+    transform .15s ease;
+}
+
+
+.athlete-item:hover {
+
+  border-color:
+    #b8dfcb;
+
+  background:
+    #f8fcfa;
+
+  transform:
+    translateX(2px);
+}
+
+
+.athlete-item.active {
+
+  border-color:
+    var(--accent);
+
+  background:
+    var(--accent-light);
+
+  box-shadow:
+    inset 3px 0 0
+    var(--accent);
+}
+
+
+.athlete-item span {
+
+  font-size: 12px;
+
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   HISTORIQUE ATHLÈTE
+   ============================================================ */
+
+.athlete-history {
+
+  margin-top: 25px;
+
+  padding-top: 25px;
+
+  border-top:
+    1px solid var(--line);
+}
+
+
+.athlete-history h3 {
+
+  margin-top: 0;
+}
+
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+
+.modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 20px;
+
+  background:
+    rgba(10, 30, 20, .45);
+
+  backdrop-filter:
+    blur(5px);
+}
+
+
+.modal.hidden {
+  display: none;
+}
+
+
+/* ============================================================
+   RESPONSIVE — TABLETTE
+   ============================================================ */
+
+@media (max-width: 850px) {
+
+  .exercise-settings {
+
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+
+  .program-editor-header {
+
+    flex-direction: column;
+  }
+
+}
+
+
+/* ============================================================
+   RESPONSIVE — MOBILE
+   ============================================================ */
+
+@media (max-width: 720px) {
+
+  h1 {
+    font-size: 28px;
+  }
+
+
+  .container {
+
+    padding:
+      22px 15px 55px;
+  }
+
+
+  .exercise-list {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .session-head {
+
+    align-items:
+      flex-start;
+  }
+
+
+  .start-row {
+
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+
+  .compact {
+
+    max-width:
+      none;
+  }
+
+
+  .form-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .metrics {
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .metric {
+
+    padding:
+      14px;
+  }
+
+
+  .exercise img {
+
+    width:
+      90px;
+
+    height:
+      72px;
+  }
+
+
+  .phase-header {
+
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+
+  .program-actions {
+
+    display:
+      grid;
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .program-actions button {
+
+    width:
+      100%;
+  }
+
+
+  .exercise-settings {
+
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+
+  .exercise-main {
+
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+
+/* ============================================================
+   PETIT MOBILE
+   ============================================================ */
+
+@media (max-width: 450px) {
+
+  .topbar {
+
+    padding:
+      0 15px;
+  }
+
+
+  .brand {
+    font-size: 20px;
+  }
+
+
+  .card {
+
+    padding:
+      17px;
+
+    border-radius:
+      17px;
+  }
+
+
+  .auth-card {
+
+    padding:
+      27px 20px;
+
+    border-radius:
+      20px;
+  }
+
+
+  .exercise img {
+
+    width:
+      82px;
+
+    height:
+      68px;
+  }
+
+
+  .timer {
+
+    font-size:
+      19px;
+  }
+
+
+  .program-actions {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .exercise-settings {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .exercise-actions {
+
+    flex-direction:
+      column;
+  }
+
+
+  .exercise-actions button {
+
+    width:
+      100%;
+  }
+
+}
+/* ============================================================
+   HISTORIQUE DES SÉANCES — COACH
+   ============================================================ */
+
+.history-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 16px;
+}
+
+
+.history-heading h3 {
+
+  margin: 0;
+
+  font-size: 20px;
+}
+
+
+/* ============================================================
+   STATISTIQUES
+   ============================================================ */
+
+.athlete-history .stats {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+
+.athlete-history .stats > div {
+
+  padding:
+    14px;
+
+  border:
+    1px solid #e3ebe6;
+
+  border-radius:
+    13px;
+
+  background:
+    #f8fbf9;
+}
+
+
+.athlete-history .stats b {
+
+  display: block;
+
+  font-size:
+    21px;
+
+  font-weight:
+    850;
+
+  color:
+    var(--accent-dark);
+}
+
+
+.athlete-history .stats span {
+
+  display: block;
+
+  margin-top:
+    3px;
+
+  font-size:
+    10px;
+
+  color:
+    var(--muted);
+}
+
+
+/* ============================================================
+   CARTE SÉANCE
+   ============================================================ */
+
+.session-history {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    9px;
+}
+
+
+.session-card {
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid #e0e9e4;
+
+  border-radius:
+    15px;
+
+  background:
+    #fff;
+
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+
+.session-card:hover {
+
+  border-color:
+    #cbdcd3;
+
+  box-shadow:
+    0 7px 22px
+    rgba(20, 70, 45, .06);
+}
+
+
+.session-card.expanded {
+
+  border-color:
+    #a9d8c0;
+
+  box-shadow:
+    0 9px 28px
+    rgba(20, 70, 45, .08);
+}
+
+
+/* ============================================================
+   RÉSUMÉ CLIQUABLE
+   ============================================================ */
+
+.session-summary {
+
+  width:
+    100%;
+
+  min-height:
+    68px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    42px minmax(0, 1fr) auto 22px;
+
+  align-items:
+    center;
+
+  gap:
+    12px;
+
+  padding:
+    10px 13px;
+
+  border:
+    0;
+
+  border-radius:
+    0;
+
+  background:
+    transparent;
+
+  color:
+    inherit;
+
+  text-align:
+    left;
+
+  cursor:
+    pointer;
+}
+
+
+.session-summary:hover {
+
+  background:
+    #fafcfb;
+}
+
+
+.session-icon {
+
+  width:
+    38px;
+
+  height:
+    38px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    11px;
+
+  background:
+    var(--accent-light);
+
+  color:
+    var(--accent-dark);
+}
+
+
+.session-icon svg {
+
+  width:
+    19px;
+
+  height:
+    19px;
+}
+
+
+.session-summary-main {
+
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    3px;
+}
+
+
+.session-summary-main strong {
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+
+  font-size:
+    13px;
+}
+
+
+.session-summary-main > span {
+
+  font-size:
+    10px;
+
+  color:
+    var(--muted);
+}
+
+
+.session-summary-stats {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    13px;
+
+  color:
+    var(--muted);
+
+  font-size:
+    10px;
+
+  white-space:
+    nowrap;
+}
+
+
+.session-summary-stats span {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    4px;
+}
+
+
+.session-summary-stats svg {
+
+  width:
+    14px;
+
+  height:
+    14px;
+
+  color:
+    var(--accent);
+}
+
+
+.session-chevron {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  color:
+    #87978e;
+
+  transition:
+    transform .18s ease;
+}
+
+
+.session-chevron svg {
+
+  width:
+    17px;
+
+  height:
+    17px;
+}
+
+
+.session-card.expanded
+.session-chevron {
+
+  transform:
+    rotate(180deg);
+}
+
+
+/* ============================================================
+   DÉTAIL
+   ============================================================ */
+
+.session-details {
+
+  border-top:
+    1px solid #e8efeb;
+
+  background:
+    #fbfdfc;
+}
+
+
+.session-detail-content {
+
+  padding:
+    18px;
+}
+
+
+.session-detail-header {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    15px;
+
+  margin-bottom:
+    14px;
+}
+
+
+.session-detail-header h4 {
+
+  margin:
+    0;
+
+  font-size:
+    15px;
+}
+
+
+.session-total {
+
+  display:
+    flex;
+
+  align-items:
+    baseline;
+
+  gap:
+    5px;
+
+  padding:
+    8px 11px;
+
+  border-radius:
+    10px;
+
+  background:
+    var(--orange-light);
+
+  color:
+    var(--orange-dark);
+}
+
+
+.session-total strong {
+
+  font-size:
+    18px;
+}
+
+
+.session-total span {
+
+  font-size:
+    10px;
+
+  font-weight:
+    700;
+}
+
+
+/* ============================================================
+   EXERCICES DE LA SÉANCE
+   ============================================================ */
+
+.session-exercises {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  border:
+    1px solid #e3ebe6;
+
+  border-radius:
+    12px;
+
+  overflow:
+    hidden;
+
+  background:
+    #fff;
+}
+
+
+.session-exercise-row {
+
+  min-height:
+    48px;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    28px minmax(0, 1fr) auto;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
+
+  padding:
+    8px 12px;
+
+  border-bottom:
+    1px solid #edf2ef;
+}
+
+
+.session-exercise-row:last-child {
+
+  border-bottom:
+    0;
+}
+
+
+.session-exercise-number {
+
+  width:
+    26px;
+
+  height:
+    26px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    8px;
+
+  background:
+    #f0f5f2;
+
+  color:
+    var(--muted);
+
+  font-size:
+    10px;
+
+  font-weight:
+    800;
+}
+
+
+.session-exercise-name {
+
+  min-width:
+    0;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+
+  font-size:
+    12px;
+
+  font-weight:
+    650;
+
+  color:
+    #26352d;
+}
+
+
+.session-exercise-reps {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    4px;
+
+  min-width:
+    75px;
+
+  justify-content:
+    flex-end;
+
+  color:
+    var(--accent-dark);
+
+  font-size:
+    10px;
+}
+
+
+.session-exercise-reps svg {
+
+  width:
+    14px;
+
+  height:
+    14px;
+}
+
+
+.session-exercise-reps strong {
+
+  font-size:
+    14px;
+}
+
+
+/* ============================================================
+   PIED DE DÉTAIL
+   ============================================================ */
+
+.session-detail-footer {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    14px;
+
+  margin-top:
+    13px;
+
+  color:
+    var(--muted);
+
+  font-size:
+    10px;
+}
+
+
+.session-detail-footer span {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    5px;
+}
+
+
+.session-detail-footer svg {
+
+  width:
+    14px;
+
+  height:
+    14px;
+
+  color:
+    var(--accent);
+}
+
+
+/* ============================================================
+   CAS SANS DONNÉES
+   ============================================================ */
+
+.session-no-data,
+.session-in-progress {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  padding:
+    17px;
+
+  color:
+    var(--muted);
+
+  font-size:
+    11px;
+}
+
+
+.session-no-data svg,
+.session-in-progress svg {
+
+  width:
+    17px;
+
+  height:
+    17px;
+
+  flex:
+    0 0 auto;
+}
+
+
+.session-no-data p {
+
+  margin:
+    0;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 800px) {
+
+  .athlete-history .stats {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .session-summary {
+
+    grid-template-columns:
+      38px minmax(0, 1fr) 22px;
+  }
+
+
+  .session-summary-stats {
+
+    grid-column:
+      2;
+
+    grid-row:
+      2;
+
+    justify-content:
+      flex-start;
+  }
+
+
+  .session-chevron {
+
+    grid-column:
+      3;
+
+    grid-row:
+      1 / span 2;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .athlete-history .stats {
+
+    gap:
+      7px;
+  }
+
+
+  .athlete-history .stats > div {
+
+    padding:
+      11px;
+  }
+
+
+  .session-detail-content {
+
+    padding:
+      13px;
+  }
+
+
+  .session-exercise-row {
+
+    grid-template-columns:
+      26px minmax(0, 1fr) auto;
+
+    gap:
+      7px;
+
+    padding:
+      8px;
+  }
+
+
+  .session-exercise-name {
+
+    font-size:
+      11px;
+  }
+
+
+  .session-detail-footer {
+
+    flex-direction:
+      column;
+
+    align-items:
+      flex-start;
+
+    gap:
+      7px;
+  }
+
+}

@@ -1,1 +1,553 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Coach Dashboard</title><link rel="stylesheet" href="css/style.css"></head><body><header class="topbar"><strong>Fitness Coach — Coach</strong><button id="logout" class="secondary">Déconnexion</button></header><main class="container"><section class="hero"><div><span class="eyebrow">TABLEAU DE BORD</span><h1>Mes athlètes</h1><p class="muted">Ajoutez et suivez plusieurs athlètes depuis le même espace.</p></div><button id="addBtn">+ Ajouter une athlète</button></section><div id="message" class="message"></div><section class="grid"><div class="card"><h2>Liste des athlètes</h2><div id="athletes"></div></div><div class="card"><h2 id="detailTitle">Sélectionnez une athlète</h2><div id="detail"></div></div></section></main><div id="modal" class="modal hidden"><div class="modal-card"><button id="closeModal" class="close">×</button><h2>Ajouter une athlète</h2><form id="athleteForm"><label>Nom complet<input id="name" required></label><label>Email de connexion<input id="athleteEmail" type="email" required></label><label>Mot de passe temporaire<input id="athletePassword" type="password" minlength="8" required></label><button>Créer le compte</button><p class="muted small">Le mot de passe temporaire doit être transmis de façon sécurisée à l’athlète.</p></form></div></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/coach.js"></script></body></html>
+<!doctype html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="theme-color"
+        content="#16a36a"
+    >
+
+    <meta
+        name="description"
+        content="Tableau de bord du coach Fitness Coach"
+    >
+
+    <title>
+        Coach Dashboard — Fitness Coach
+    </title>
+
+
+    <!-- =====================================================
+         POLICE
+         ===================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ICÔNES
+         ===================================================== -->
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+    ></script>
+
+
+    <!-- =====================================================
+         STYLE
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BARRE SUPÉRIEURE
+         ===================================================== -->
+
+    <header class="topbar">
+
+
+        <div class="brand">
+
+            <span class="brand-mark">
+                <i data-lucide="activity"></i>
+            </span>
+
+            <span>
+                Fitness
+            </span>
+
+            <strong>
+                Coach
+            </strong>
+
+        </div>
+
+
+        <div class="coach-topbar-actions">
+
+
+            <span class="coach-role">
+
+                <i data-lucide="shield-check"></i>
+
+                Coach
+
+            </span>
+
+
+            <button
+                id="logout"
+                class="ghost"
+                type="button"
+            >
+
+                <i data-lucide="log-out"></i>
+
+                <span>
+                    Déconnexion
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENU PRINCIPAL
+         ===================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="coach-hero">
+
+
+            <div class="hero-content">
+
+
+                <span class="eyebrow">
+
+                    <i data-lucide="layout-dashboard"></i>
+
+                    Tableau de bord
+
+                </span>
+
+
+                <h1>
+                    Mes athlètes
+                </h1>
+
+
+                <p class="muted">
+
+                    Gérez vos athlètes, leurs programmes
+                    et leur progression depuis un seul espace.
+
+                </p>
+
+
+            </div>
+
+
+            <button
+                id="addBtn"
+                class="primary big"
+                type="button"
+            >
+
+                <i data-lucide="user-plus"></i>
+
+                <span>
+                    Ajouter une athlète
+                </span>
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             MESSAGE GLOBAL
+             ================================================= -->
+
+        <div
+            id="message"
+            class="message"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+
+
+        <!-- =================================================
+             DASHBOARD
+             ================================================= -->
+
+        <section class="coach-layout">
+
+
+            <!-- =================================================
+                 LISTE DES ATHLÈTES
+                 ================================================= -->
+
+            <aside class="card athletes-card">
+
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <span class="section-kicker">
+                            SUIVI
+                        </span>
+
+                        <h2>
+                            Mes athlètes
+                        </h2>
+
+                    </div>
+
+
+                    <span class="section-icon green">
+
+                        <i data-lucide="users"></i>
+
+                    </span>
+
+
+                </div>
+
+
+                <p class="muted athletes-help">
+
+                    Sélectionnez une athlète pour
+                    consulter son programme et son historique.
+
+                </p>
+
+
+                <div
+                    id="athletes"
+                    class="athlete-list"
+                >
+
+                    <div class="loading-state">
+
+                        <span class="loading-dot"></span>
+
+                        <p>
+                            Chargement des athlètes…
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </aside>
+
+
+
+            <!-- =================================================
+                 DÉTAIL ATHLÈTE
+                 ================================================= -->
+
+            <section class="card athlete-detail-card">
+
+
+                <div class="detail-top">
+
+
+                    <div>
+
+                        <span class="section-kicker">
+                            PROGRAMME &amp; SUIVI
+                        </span>
+
+
+                        <h2 id="detailTitle">
+                            Sélectionnez une athlète
+                        </h2>
+
+                    </div>
+
+
+                    <span class="section-icon orange">
+
+                        <i data-lucide="clipboard-list"></i>
+
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    id="detail"
+                    class="athlete-detail"
+                >
+
+                    <div class="empty-state">
+
+                        <div class="empty-state-icon">
+
+                            <i data-lucide="user-round-search"></i>
+
+                        </div>
+
+
+                        <h3>
+                            Aucune athlète sélectionnée
+                        </h3>
+
+
+                        <p class="muted">
+
+                            Sélectionnez une athlète dans
+                            la liste pour consulter son
+                            programme et son suivi.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         MODALE — AJOUT ATHLÈTE
+         ===================================================== -->
+
+    <div
+        id="modal"
+        class="modal hidden"
+        aria-hidden="true"
+    >
+
+
+        <div
+            class="modal-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
+
+
+            <!-- ---------------------------------------------
+                 EN-TÊTE
+                 --------------------------------------------- -->
+
+            <div class="modal-header">
+
+
+                <div class="modal-title-icon">
+
+                    <i data-lucide="user-plus"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span class="section-kicker">
+                        NOUVELLE ATHLÈTE
+                    </span>
+
+
+                    <h2 id="modalTitle">
+                        Ajouter une athlète
+                    </h2>
+
+                </div>
+
+
+                <button
+                    id="closeModal"
+                    class="close"
+                    type="button"
+                    aria-label="Fermer"
+                >
+
+                    <i data-lucide="x"></i>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ---------------------------------------------
+                 FORMULAIRE
+                 --------------------------------------------- -->
+
+            <form id="athleteForm">
+
+
+                <label>
+
+                    Nom complet
+
+                    <input
+                        id="name"
+                        type="text"
+                        autocomplete="name"
+                        placeholder="Ex. Marie Dupont"
+                        required
+                    >
+
+                </label>
+
+
+
+                <label>
+
+                    Email de connexion
+
+                    <input
+                        id="athleteEmail"
+                        type="email"
+                        autocomplete="email"
+                        placeholder="athlete@email.com"
+                        required
+                    >
+
+                </label>
+
+
+
+                <label>
+
+                    Mot de passe temporaire
+
+                    <input
+                        id="athletePassword"
+                        type="password"
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Minimum 8 caractères"
+                        required
+                    >
+
+                </label>
+
+
+
+                <div class="form-info">
+
+                    <i data-lucide="info"></i>
+
+                    <span>
+
+                        Le mot de passe temporaire doit être
+                        transmis de manière sécurisée à l’athlète.
+
+                    </span>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="primary big"
+                >
+
+                    <i data-lucide="user-plus"></i>
+
+                    Créer le compte
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         SUPABASE
+         ===================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+
+    <!-- =====================================================
+         CONFIGURATION
+         ===================================================== -->
+
+    <script src="js/config.js"></script>
+
+
+
+    <!-- =====================================================
+         APPLICATION COACH
+         ===================================================== -->
+
+    <script src="js/coach.js"></script>
+
+
+
+    <!-- =====================================================
+         INITIALISATION ICÔNES
+         ===================================================== -->
+
+    <script>
+
+        if (
+            typeof lucide !== "undefined"
+        ) {
+
+            lucide.createIcons();
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,1 +1,420 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mon entraînement</title><link rel="stylesheet" href="css/style.css"></head><body><header class="topbar"><strong>Fitness Coach</strong><button id="logout" class="secondary">Déconnexion</button></header><main class="container"><section class="hero"><div><span class="eyebrow">ESPACE ATHLÈTE</span><h1 id="welcome">Ma séance</h1><p id="today" class="muted"></p></div><div class="stat"><b id="timer">00:00</b><span>durée</span></div></section><section class="grid"><div class="card"><h2>Séance du jour</h2><div id="workout"></div><div class="actions"><button id="startBtn">Commencer la séance</button><button id="finishBtn" disabled>Terminer la séance</button></div></div><div class="card"><h2>Mon historique</h2><div id="history"></div></div></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="theme-color"
+        content="#16a36a"
+    >
+
+    <meta
+        name="description"
+        content="Votre programme et vos séances Fitness Coach"
+    >
+
+    <title>
+        Mon entraînement — Fitness Coach
+    </title>
+
+
+    <!-- =====================================================
+         POLICE
+         ===================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ICÔNES
+         ===================================================== -->
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+    ></script>
+
+
+    <!-- =====================================================
+         STYLE
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         BARRE SUPÉRIEURE
+         ===================================================== -->
+
+    <header class="topbar">
+
+
+        <div class="brand">
+
+            <span class="brand-mark">
+                <i data-lucide="activity"></i>
+            </span>
+
+            <span>
+                Fitness
+            </span>
+
+            <strong>
+                Coach
+            </strong>
+
+        </div>
+
+
+        <button
+            id="logout"
+            class="ghost"
+            type="button"
+            title="Se déconnecter"
+        >
+
+            <i data-lucide="log-out"></i>
+
+            <span>
+                Déconnexion
+            </span>
+
+        </button>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENU
+         ===================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             EN-TÊTE
+             ================================================= -->
+
+        <section class="athlete-hero">
+
+
+            <div class="hero-content">
+
+
+                <span class="eyebrow">
+
+                    <i data-lucide="sparkles"></i>
+
+                    Espace athlète
+
+                </span>
+
+
+                <h1 id="welcome">
+                    Ma séance
+                </h1>
+
+
+                <p
+                    id="today"
+                    class="hero-date"
+                ></p>
+
+
+                <!-- Programme actuel -->
+
+                <div
+                    id="programInfo"
+                    class="program-summary"
+                >
+
+                    <span class="loading-dot"></span>
+
+                    Chargement de mon programme…
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TIMER
+                 ================================================= -->
+
+            <div class="timer-card">
+
+
+                <div class="timer-icon">
+
+                    <i data-lucide="timer"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span class="timer-label">
+                        Durée de la séance
+                    </span>
+
+
+                    <strong
+                        id="timer"
+                        class="timer"
+                    >
+                        00:00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTENU PRINCIPAL
+             ================================================= -->
+
+        <section class="athlete-layout">
+
+
+            <!-- =================================================
+                 SÉANCE
+                 ================================================= -->
+
+            <div class="card workout-card">
+
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <span class="section-kicker">
+                            AUJOURD'HUI
+                        </span>
+
+                        <h2>
+                            Ma séance
+                        </h2>
+
+                    </div>
+
+
+                    <span class="section-icon green">
+
+                        <i data-lucide="dumbbell"></i>
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!--
+                    app.js injecte ici les exercices
+                    provenant de Supabase.
+                -->
+
+                <div id="workout">
+
+                    <div class="loading-state">
+
+                        <span class="loading-dot"></span>
+
+                        <p>
+                            Chargement de la séance…
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACTIONS
+                     ================================================= -->
+
+                <div class="workout-actions">
+
+
+                    <button
+                        id="startBtn"
+                        class="primary big workout-start"
+                        type="button"
+                    >
+
+                        <i data-lucide="play"></i>
+
+                        <span>
+                            Commencer la séance
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        id="finishBtn"
+                        class="finish-button"
+                        type="button"
+                        disabled
+                    >
+
+                        <i data-lucide="square"></i>
+
+                        <span>
+                            Terminer la séance
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 HISTORIQUE
+                 ================================================= -->
+
+            <aside class="card history-card">
+
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <span class="section-kicker">
+                            PROGRESSION
+                        </span>
+
+                        <h2>
+                            Mon historique
+                        </h2>
+
+                    </div>
+
+
+                    <span class="section-icon orange">
+
+                        <i data-lucide="trending-up"></i>
+
+                    </span>
+
+
+                </div>
+
+
+                <div id="history">
+
+                    <div class="loading-state">
+
+                        <span class="loading-dot"></span>
+
+                        <p>
+                            Chargement de l'historique…
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </aside>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         SUPABASE
+         ===================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+
+    <!-- =====================================================
+         CONFIGURATION
+         ===================================================== -->
+
+    <script src="js/config.js"></script>
+
+
+
+    <!-- =====================================================
+         APPLICATION
+         ===================================================== -->
+
+    <script src="js/app.js"></script>
+
+
+
+    <!-- =====================================================
+         INITIALISATION ICÔNES
+         ===================================================== -->
+
+    <script>
+
+        if (
+            typeof lucide !== "undefined"
+        ) {
+
+            lucide.createIcons();
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
